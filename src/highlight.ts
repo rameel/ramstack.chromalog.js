@@ -4,14 +4,14 @@ import {
     create_number_highlighter,
 } from "@/highlighters";
 
-const rules: Highlighter[] = [
+const default_rules: Highlighter[] = [
     create_number_highlighter(),
 ];
 
-export function highlight(str: string): string {
+export function highlight(str: string, rules?: Highlighter[]): string {
     let matches: MatchResult[] = [];
 
-    for (let rule of rules) {
+    for (let rule of rules ?? default_rules) {
         gather_matches(str, rule, matches);
     }
 
