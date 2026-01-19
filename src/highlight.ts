@@ -39,7 +39,7 @@ export function highlight(str: string, rules?: Highlighter[]): string {
             return b.count - a.count;
         }
 
-        return 0;
+        return a.order - b.order;
     });
 
     let pos = 0;
@@ -69,6 +69,7 @@ function gather_matches(str: string, rule: Highlighter, matches: MatchResult[]) 
             matches.push({
                 start: match.index,
                 count: match[0].length,
+                order: rule.order ?? 0,
                 apply: () => rule.apply(value)
             });
         }
@@ -76,6 +77,7 @@ function gather_matches(str: string, rule: Highlighter, matches: MatchResult[]) 
 }
 
 interface MatchResult {
+    order: number;
     start: number;
     count: number;
     apply: () => string
