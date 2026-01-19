@@ -1,7 +1,9 @@
 import type { Highlighter } from "@/types";
 
 import {
+    create_guid_highlighter,
     create_number_highlighter,
+    create_keyword_highlighter,
 } from "@/highlighters";
 
 const default_rules: Highlighter[] = [
