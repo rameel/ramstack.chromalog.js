@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import { highlight } from "@/highlight";
 import {
+    create_datetime_iso_highlighter,
     create_guid_highlighter,
     create_ip4_highlighter,
     create_keyword_highlighter,
@@ -44,7 +45,7 @@ test("all: highlights tokens ", () => {
 
         Administrator said: [string: 'Check C:\\Windows\\System32\\drivers\\etc\\hosts and /etc/hosts on 192.168.1.100'].
         API call: [kw: GET] [path: /api/v1/status], then [kw: PATCH] [path: /config/123] with {[string: "active"]: [kw: true], [string: "retry_count"]: [number: 3.14]}.
-        Response: [number: 404] on 2026-01-19T14:30:00.000Z.
+        Response: [number: 404] on [iso: 2026-01-19T14:30:00.000Z].
 
         Paths tested:
         - [path: ~/tasks/2026/01/19]
@@ -65,6 +66,7 @@ test("all: highlights tokens ", () => {
 
 
     const highlighters = [
+        create_datetime_iso_highlighter(s => `[iso: ${s}]`),
         create_guid_highlighter(s => `[guid: ${s}]`),
         create_ip4_highlighter(s => `[ip: ${s}]`),
         create_keyword_highlighter(s => `[kw: ${s}]`),
