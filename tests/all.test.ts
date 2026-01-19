@@ -10,6 +10,7 @@ import {
     create_string_highlighter,
     create_time_highlighter,
     create_unix_path_highlighter,
+    create_unix_process_highlighter,
     create_windows_path_highlighter,
 } from "@/highlighters";
 
@@ -77,6 +78,7 @@ test("all: highlights tokens ", () => {
         create_string_highlighter(s => `[string: ${s}]`),
         create_time_highlighter(s => `[time: ${s}]`),
         create_unix_path_highlighter(s => `[path: ${s}]`),
+        create_unix_process_highlighter(s => `[proc: ${s}]`),
         create_windows_path_highlighter(s => `[path: ${s}]`),
     ];
 

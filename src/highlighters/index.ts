@@ -7,6 +7,7 @@ import { create_number_highlighter } from "@/highlighters/create_number_highligh
 import { create_string_highlighter } from "@/highlighters/create_string_highlighter";
 import { create_time_highlighter } from "@/highlighters/create_time_highlighter";
 import { create_unix_path_highlighter } from "@/highlighters/create_unix_path_highlighter";
+import { create_unix_process_highlighter } from "@/highlighters/create_unix_process_highlighter";
 import { create_windows_path_highlighter } from "@/highlighters/create_windows_path_highlighter";
 
 export {
@@ -19,5 +20,6 @@ export {
     create_string_highlighter,
     create_time_highlighter,
     create_unix_path_highlighter,
+    create_unix_process_highlighter,
     create_windows_path_highlighter,
 }
