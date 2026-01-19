@@ -1,6 +1,6 @@
-import {describe, expect, test} from "vitest";
-import {highlight} from "@/highlight";
-import {create_number_highlighter} from "@/highlighters/create_number_highlighter";
+import { describe, expect, test } from "vitest";
+import { highlight } from "@/highlight";
+import { create_number_highlighter } from "@/highlighters";
 
 describe("number", () => {
     test("highlights numbers ", () => {
