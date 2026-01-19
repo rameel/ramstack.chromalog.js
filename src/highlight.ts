@@ -7,6 +7,7 @@ import {
     create_keyword_highlighter,
     create_number_highlighter,
     create_string_highlighter,
+    create_time_highlighter,
     create_unix_path_highlighter,
     create_windows_path_highlighter,
 } from "@/highlighters";
@@ -19,6 +20,7 @@ const default_rules: Highlighter[] = [
     create_keyword_highlighter(),
     create_number_highlighter(),
     create_string_highlighter(),
+    create_time_highlighter(),
     create_unix_path_highlighter(),
     create_windows_path_highlighter(),
 ];

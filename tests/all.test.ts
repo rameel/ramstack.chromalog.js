@@ -8,13 +8,14 @@ import {
     create_keyword_highlighter,
     create_number_highlighter,
     create_string_highlighter,
+    create_time_highlighter,
     create_unix_path_highlighter,
     create_windows_path_highlighter,
 } from "@/highlighters";
 
 test("all: highlights tokens ", () => {
     const text = `
-        The system reported: "Path '/usr/local/bin/2026' not found" at 2026-01-19 14:30:00+00:00
+        The system reported: "Path '/usr/local/bin/2026' not found" at 2026-01-19 14:30:00
         while processing request ID 12345. log('ERROR', 'File ~/tasks/2026/01/19/report_2026-01-19.log missing')
         returned null. Config value 'enable_feature' set to false, but 'debug_mode' remained true.
 
@@ -40,7 +41,7 @@ test("all: highlights tokens ", () => {
         "null", "GET", "HEAD", "WARNING message".`;
 
     const expected = `
-        The system reported: [string: "Path '/usr/local/bin/2026' not found"] at [date: 2026-01-19] 14:30:00
+        The system reported: [string: "Path '/usr/local/bin/2026' not found"] at [date: 2026-01-19] [time: 14:30:00]
         while processing request ID [number: 12345]. log([string: 'ERROR'], [string: 'File ~/tasks/2026/01/19/report_2026-01-19.log missing'])
         returned [kw: null]. Config value [string: 'enable_feature'] set to [kw: false], but [string: 'debug_mode'] remained [kw: true].
 
@@ -74,6 +75,7 @@ test("all: highlights tokens ", () => {
         create_keyword_highlighter(s => `[kw: ${s}]`),
         create_number_highlighter(s => `[number: ${s}]`),
         create_string_highlighter(s => `[string: ${s}]`),
+        create_time_highlighter(s => `[time: ${s}]`),
         create_unix_path_highlighter(s => `[path: ${s}]`),
         create_windows_path_highlighter(s => `[path: ${s}]`),
     ];
