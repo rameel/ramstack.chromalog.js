@@ -1,0 +1,67 @@
+import type { Highlighter } from "@/types";
+
+import {
+    create_number_highlighter,
+} from "@/highlighters";
+
+const rules: Highlighter[] = [
+    create_number_highlighter(),
+];
+
+export function highlight(str: string): string {
+    let matches: MatchResult[] = [];
+
+    for (let rule of rules) {
+        gather_matches(str, rule, matches);
+    }
+
+    matches.sort((a, b) => {
+        if (a.start !== b.start) {
+            return a.start - b.start;
+        }
+
+        if (a.count !== b.count) {
+            return a.count - b.count;
+        }
+
+        return 0;
+    });
+
+    let pos = 0;
+    let builder = [];
+
+    for (let match of matches) {
+        if (match.start < pos) {
+            continue;
+        }
+
+        if (match.start > pos) {
+            builder.push(str.slice(pos, match.start));
+        }
+
+        builder.push(match.apply());
+        pos = match.start + match.count;
+    }
+
+    pos < str.length && builder.push(str.slice(pos));
+    return builder.join("");
+}
+
+function gather_matches(str: string, rule: Highlighter, matches: MatchResult[]) {
+    for (let match of str.matchAll(rule.regex)) {
+        if (match[0].length > 0) {
+            const value = match[0];
+            matches.push({
+                start: match.index,
+                count: match[0].length,
+                apply: () => rule.apply(value)
+            });
+        }
+    }
+}
+
+interface MatchResult {
+    start: number;
+    count: number;
+    apply: () => string
+}

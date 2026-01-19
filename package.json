@@ -1,0 +1,46 @@
+{
+  "name": "@ramstack/chromalog",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "author": "rameel <rameel-b@hotmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rameel/ramstack.chromalog.js.git"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rolldown -c"
+  },
+  "keywords": [
+    "log",
+    "logger",
+    "console",
+    "highlight",
+    "highlighting",
+    "color",
+    "terminal"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "rolldown": "1.0.0-beta.60",
+    "rolldown-plugin-dts": "^0.21.2",
+    "vitest": "^4.0.17"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1"
+  }
+}
