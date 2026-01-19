@@ -4,7 +4,8 @@ import {
     create_guid_highlighter,
     create_keyword_highlighter,
     create_number_highlighter,
-    create_string_highlighter
+    create_string_highlighter,
+    create_unix_path_highlighter,
 } from "@/highlighters";
 
 const default_rules: Highlighter[] = [
@@ -12,6 +13,7 @@ const default_rules: Highlighter[] = [
     create_keyword_highlighter(),
     create_number_highlighter(),
     create_string_highlighter(),
+    create_unix_path_highlighter(),
 ];
 
 export function highlight(str: string, rules?: Highlighter[]): string {
