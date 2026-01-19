@@ -1,7 +1,2 @@
-import { highlight } from "@/highlight";
-
-export {
-    highlight
-};
-
+export * from "@/highlight"
 export * from "@/highlighters"

@@ -1,6 +1,6 @@
-import {describe, expect, test} from "vitest";
-import {highlight} from "@/highlight";
-import {create_date_highlighter} from "@/highlighters";
+import { describe, expect, test } from "vitest";
+import { highlight } from "@/highlight";
+import { create_date_highlighter } from "@/highlighters";
 
 describe("date", () => {
     test("highlights dates in YYYY-MM-DD and DD/MM/YYYY formats", () => {
