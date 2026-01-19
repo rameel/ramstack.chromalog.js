@@ -2,12 +2,16 @@ import type { Highlighter } from "@/types";
 
 import {
     create_guid_highlighter,
-    create_number_highlighter,
     create_keyword_highlighter,
+    create_number_highlighter,
+    create_string_highlighter
 } from "@/highlighters";
 
 const default_rules: Highlighter[] = [
+    create_guid_highlighter(),
+    create_keyword_highlighter(),
     create_number_highlighter(),
+    create_string_highlighter(),
 ];
 
 export function highlight(str: string, rules?: Highlighter[]): string {
