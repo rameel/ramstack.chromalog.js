@@ -2,6 +2,7 @@ import { expect, test } from "vitest";
 import { highlight } from "@/highlight";
 import {
     create_guid_highlighter,
+    create_ip4_highlighter,
     create_keyword_highlighter,
     create_number_highlighter,
     create_string_highlighter,
@@ -26,7 +27,7 @@ test("all: highlights tokens ", () => {
         - C:\\Users\\admin\\Documents\\2026\\01\\19\\data.csv
         - /opt/backup/192.168.1.100/2026-01-19.tar.gz
 
-        Commands: DELETE /tmp/cache/12345, POST /upload with file "data_2026_01_19.json", HEAD /health,
+        Commands: DELETE /tmp/cache/12345, POST /upload with file "/data/2026-01-19.json", HEAD /health,
         PUT /settings/789, INFO 'Service restarted at 14:30:00'. WARNING: IPv4 10.0.0.255 unreachable.
         ERROR: Path "/home/user/2026/01/19" contains segment "2026" matching date 2026-01-19.
 
@@ -53,7 +54,7 @@ test("all: highlights tokens ", () => {
         - [path: /opt/backup/192.168.1.100/2026-01-19.tar.gz]
 
         Commands: [kw: DELETE] [path: /tmp/cache/12345], [kw: POST] [path: /upload] with file [string: "/data/2026-01-19.json"], [kw: HEAD] [path: /health],
-        [kw: PUT] [path: /settings/789], [kw: INFO] [string: 'Service restarted at 14:30:00']. [kw: WARNING]: IPv4 10.0.0.255 unreachable.
+        [kw: PUT] [path: /settings/789], [kw: INFO] [string: 'Service restarted at 14:30:00']. [kw: WARNING]: IPv4 [ip: 10.0.0.255] unreachable.
         [kw: ERROR]: Path [string: "/home/user/2026/01/19"] contains segment [string: "2026"] matching date 2026-01-19.
 
         Final check: numbers [number: 123], [number: 456.789], [number: 0xFF], paths with digits [path: /opt/2026/01/19],
@@ -65,6 +66,7 @@ test("all: highlights tokens ", () => {
 
     const highlighters = [
         create_guid_highlighter(s => `[guid: ${s}]`),
+        create_ip4_highlighter(s => `[ip: ${s}]`),
         create_keyword_highlighter(s => `[kw: ${s}]`),
         create_number_highlighter(s => `[number: ${s}]`),
         create_string_highlighter(s => `[string: ${s}]`),
