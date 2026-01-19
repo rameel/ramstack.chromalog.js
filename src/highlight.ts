@@ -21,7 +21,7 @@ export function highlight(str: string, rules?: Highlighter[]): string {
         }
 
         if (a.count !== b.count) {
-            return a.count - b.count;
+            return b.count - a.count;
         }
 
         return 0;
