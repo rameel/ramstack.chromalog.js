@@ -1,18 +1,24 @@
 import type { Highlighter } from "@/types";
 import {
+    create_datetime_iso_highlighter,
     create_guid_highlighter,
+    create_ip4_highlighter,
     create_keyword_highlighter,
     create_number_highlighter,
     create_string_highlighter,
     create_unix_path_highlighter,
+    create_windows_path_highlighter,
 } from "@/highlighters";
 
 const default_rules: Highlighter[] = [
+    create_datetime_iso_highlighter(),
     create_guid_highlighter(),
+    create_ip4_highlighter(),
     create_keyword_highlighter(),
     create_number_highlighter(),
     create_string_highlighter(),
     create_unix_path_highlighter(),
+    create_windows_path_highlighter(),
 ];
 
 export function highlight(str: string, rules?: Highlighter[]): string {
