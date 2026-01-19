@@ -1,5 +1,6 @@
 import type { Highlighter } from "@/types";
 import {
+    create_date_highlighter,
     create_datetime_iso_highlighter,
     create_guid_highlighter,
     create_ip4_highlighter,
@@ -11,6 +12,7 @@ import {
 } from "@/highlighters";
 
 const default_rules: Highlighter[] = [
+    create_date_highlighter(),
     create_datetime_iso_highlighter(),
     create_guid_highlighter(),
     create_ip4_highlighter(),

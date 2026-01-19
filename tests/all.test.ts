@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import { highlight } from "@/highlight";
 import {
+    create_date_highlighter,
     create_datetime_iso_highlighter,
     create_guid_highlighter,
     create_ip4_highlighter,
@@ -39,7 +40,7 @@ test("all: highlights tokens ", () => {
         "null", "GET", "HEAD", "WARNING message".`;
 
     const expected = `
-        The system reported: [string: "Path '/usr/local/bin/2026' not found"] at 2026-01-19 14:30:00+00:00
+        The system reported: [string: "Path '/usr/local/bin/2026' not found"] at [date: 2026-01-19] 14:30:00
         while processing request ID [number: 12345]. log([string: 'ERROR'], [string: 'File ~/tasks/2026/01/19/report_2026-01-19.log missing'])
         returned [kw: null]. Config value [string: 'enable_feature'] set to [kw: false], but [string: 'debug_mode'] remained [kw: true].
 
@@ -56,7 +57,7 @@ test("all: highlights tokens ", () => {
 
         Commands: [kw: DELETE] [path: /tmp/cache/12345], [kw: POST] [path: /upload] with file [string: "/data/2026-01-19.json"], [kw: HEAD] [path: /health],
         [kw: PUT] [path: /settings/789], [kw: INFO] [string: 'Service restarted at 14:30:00']. [kw: WARNING]: IPv4 [ip: 10.0.0.255] unreachable.
-        [kw: ERROR]: Path [string: "/home/user/2026/01/19"] contains segment [string: "2026"] matching date 2026-01-19.
+        [kw: ERROR]: Path [string: "/home/user/2026/01/19"] contains segment [string: "2026"] matching date [date: 2026-01-19].
 
         Final check: numbers [number: 123], [number: 456.789], [number: 0xFF], paths with digits [path: /opt/2026/01/19],
         [path: C:\\2026\\01\\19], mixed tokens [string: "string with 123 and /path/2026-01-19"].
@@ -66,6 +67,7 @@ test("all: highlights tokens ", () => {
 
 
     const highlighters = [
+        create_date_highlighter(s => `[date: ${s}]`),
         create_datetime_iso_highlighter(s => `[iso: ${s}]`),
         create_guid_highlighter(s => `[guid: ${s}]`),
         create_ip4_highlighter(s => `[ip: ${s}]`),
