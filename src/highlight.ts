@@ -1,5 +1,4 @@
 import type { Highlighter } from "@/types";
-
 import {
     create_guid_highlighter,
     create_keyword_highlighter,

@@ -3,6 +3,7 @@ import { create_keyword_highlighter } from "@/highlighters/create_keyword_highli
 import { create_number_highlighter } from "@/highlighters/create_number_highlighter";
 import { create_string_highlighter } from "@/highlighters/create_string_highlighter";
 import { create_unix_path_highlighter } from "@/highlighters/create_unix_path_highlighter";
+import { create_windows_path_highlighter } from "@/highlighters/create_windows_path_highlighter";
 
 export {
     create_guid_highlighter,
@@ -10,4 +11,5 @@ export {
     create_number_highlighter,
     create_string_highlighter,
     create_unix_path_highlighter,
+    create_windows_path_highlighter,
 }
