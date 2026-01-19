@@ -6,6 +6,7 @@ import {
     create_number_highlighter,
     create_string_highlighter,
     create_unix_path_highlighter,
+    create_windows_path_highlighter,
 } from "@/highlighters";
 
 test("all: highlights tokens ", () => {
@@ -68,6 +69,7 @@ test("all: highlights tokens ", () => {
         create_number_highlighter(s => `[number: ${s}]`),
         create_string_highlighter(s => `[string: ${s}]`),
         create_unix_path_highlighter(s => `[path: ${s}]`),
+        create_windows_path_highlighter(s => `[path: ${s}]`),
     ];
 
     expect(highlight(text, highlighters)).toBe(expected);
