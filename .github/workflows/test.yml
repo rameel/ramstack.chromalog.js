@@ -25,11 +25,11 @@ jobs:
           node-version: '24'
           cache: 'pnpm'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: pnpm install
 
       - name: Build
         run: pnpm build
 
-      - name: Test (vitest)
+      - name: Test
         run: pnpm test
