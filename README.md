@@ -2,12 +2,7 @@
 [![NPM](https://img.shields.io/npm/v/@ramstack/chromalog)](https://www.npmjs.com/package/@ramstack/chromalog)
 [![MIT](https://img.shields.io/github/license/rameel/ramstack.chromalog.js)](https://github.com/rameel/ramstack.chromalog.js/blob/main/LICENSE)
 
-A small and simple library for coloring text before printing it to the terminal.
-
-`@ramstack/chromalog` works only in **Node.js** and uses ANSI escape sequences under the hood.
-It does not parse logs or formats for you – it only highlights text based on rules you define.
-
-The goal is to keep things predictable, fast, and easy to customize.
+A small and simple library for log highlighting before printing text to the terminal.
 
 ![](https://github.com/rameel/ramstack.chromalog.js/blob/main/assets/screenshot.png)
 
