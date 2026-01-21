@@ -1,6 +1,17 @@
 import pc from "picocolors";
 import type { Highlighter } from "@/types";
 
+/**
+ * Creates a highlighter for keywords.
+ *
+ * Matches values like:
+ * - HTTP methods
+ * - Log level names
+ * - Boolean and null literals
+ *
+ * @param apply - Optional custom transform function for a matched value.
+ * @returns A configured keyword highlighter.
+ */
 export function create_keyword_highlighter(apply?: (m: string) => string): Highlighter {
     return {
         regex: /\b(GET|HEAD|POST|PUT|PATCH|DELETE|TRC|TRACE|DBG|DEBUG|INFO?|WRN|WARN(?:ING)?|ERR|ERROR|FTL|FATAL|true|false|null)\b/g,

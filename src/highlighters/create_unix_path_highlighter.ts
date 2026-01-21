@@ -1,6 +1,15 @@
 import pc from "picocolors";
 import type { Highlighter } from "@/types";
 
+/**
+ * Creates a highlighter for Unix-style file system paths.
+ *
+ * Uses a lower priority to reduce conflicts with other
+ * highlighters that may match the same text fragment (for example, date rule).
+ *
+ * @param apply - Optional custom transform function for a matched value.
+ * @returns A configured path highlighter.
+ */
 export function create_unix_path_highlighter(apply?: (m: string) => string): Highlighter {
     return {
         order: 10,

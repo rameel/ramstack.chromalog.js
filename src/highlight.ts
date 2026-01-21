@@ -27,6 +27,15 @@ const default_rules: Highlighter[] = [
     create_windows_path_highlighter()
 ];
 
+/**
+ * Applies highlighting rules to the specified string.
+ *
+ * If no rules are provided, a default set of built-in highlighters is used.
+ *
+ * @param value - The input string to highlight.
+ * @param rules - Optional list of highlighter rules to apply.
+ * @returns The highlighted string.
+ */
 export function highlight(value: string, rules?: Highlighter[]): string {
     let matches: MatchResult[] = [];
 

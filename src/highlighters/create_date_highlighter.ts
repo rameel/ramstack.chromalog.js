@@ -1,6 +1,19 @@
 import pc from "picocolors";
 import type { Highlighter } from "@/types";
 
+/**
+ * Creates a highlighter for date values.
+ *
+ * Matches dates in formats like:
+ * - `YYYY/MM/DD`
+ * - `YYYY-MM-DD`
+ * - `DD/MM/YYYY`
+ * - `DD-MM-YYYY`
+ * - `DD.MM.YYYY`
+ *
+ * @param apply - Optional custom transform function for a matched value.
+ * @returns A configured date highlighter.
+ */
 export function create_date_highlighter(apply?: (m: string) => string): Highlighter {
     return {
         //        [=====================YYYY/mm/dd====================] [================================dd/mm/YYYY===============================]
