@@ -35,14 +35,8 @@ export function highlight(str: string, rules?: Highlighter[]): string {
     }
 
     matches.sort((a, b) => {
-        if (a.start !== b.start) {
-            return a.start - b.start;
-        }
-
-        if (a.count !== b.count) {
-            return b.count - a.count;
-        }
-
+        if (a.start !== b.start) return a.start - b.start;
+        if (a.count !== b.count) return b.count - a.count;
         return a.order - b.order;
     });
 
