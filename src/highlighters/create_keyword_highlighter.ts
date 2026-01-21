@@ -1,4 +1,4 @@
-import { bg_cyan, bg_green, bg_red, black, cyan, gray, red, white, yellow } from "@/colors";
+import { cyan, gray, red, white, yellow } from "@/colors";
 import type { Highlighter } from "@/types";
 
 /**
@@ -52,15 +52,18 @@ export function create_keyword_highlighter(apply?: (m: string) => string): Highl
 
             case "GET":
             case "HEAD":
-                return bg_green(black(` ${s} `));
+                let black_on_green = (s: string) => "\x1b[42;30m " + s + " \x1b[0m";
+                return black_on_green(s);
 
             case "PUT":
             case "POST":
             case "PATCH":
-                return bg_cyan(black(` ${s} `));
+                let black_on_cyan = (s: string) => "\x1b[46;30m " + s + " \x1b[0m";
+                return black_on_cyan(s);
 
             case "DELETE":
-                return bg_red(black(` ${s} `));
+                let black_on_red = (s: string) => "\x1b[41;30m " + s + " \x1b[0m";
+                return black_on_red(s);
 
             default:
                 return s;
