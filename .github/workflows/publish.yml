@@ -1,0 +1,57 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.repository == 'rameel/ramstack.chromalog.js'
+    name: 'Publish Packages'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Publish package
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Archive package (.zip)
+        run: zip -r ramstack.chromalog-${{ github.ref_name }}.zip ./dist/* ./package.json ./README.md ./LICENSE
+
+      - name: Archive package (.tar.gz)
+        run: tar -czvf ramstack.chromalog-${{ github.ref_name }}.tar.gz ./dist ./package.json ./README.md ./LICENSE
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: |
+            ramstack.chromalog-${{ github.ref_name }}.zip
+            ramstack.chromalog-${{ github.ref_name }}.tar.gz
