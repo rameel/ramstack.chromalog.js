@@ -1,4 +1,4 @@
-import pc from "picocolors";
+import { bg_cyan, bg_green, bg_red, black, cyan, gray, red, white, yellow } from "@/colors";
 import type { Highlighter } from "@/types";
 
 /**
@@ -23,44 +23,44 @@ export function create_keyword_highlighter(apply?: (m: string) => string): Highl
             case "true":
             case "false":
             case "null":
-                return pc.red(s);
+                return red(s);
 
             case "TRC":
             case "TRACE":
-                return pc.gray(s);
+                return gray(s);
 
             case "DBG":
             case "DEBUG":
-                return pc.white(s);
+                return white(s);
 
             case "INF":
             case "INFO":
-                return pc.cyan(s);
+                return cyan(s);
 
             case "WRN":
             case "WARN":
             case "WARNING":
-                return pc.yellow(s);
+                return yellow(s);
 
             case "ERR":
             case "ERROR":
-                return pc.red(s);
+                return red(s);
 
             case "FTL":
             case "FATAL":
-                return pc.red(s);
+                return red(s);
 
             case "GET":
             case "HEAD":
-                return pc.bgGreen(pc.black(` ${s} `));
+                return bg_green(black(` ${s} `));
 
             case "PUT":
             case "POST":
             case "PATCH":
-                return pc.bgCyan(pc.black(` ${s} `));
+                return bg_cyan(black(` ${s} `));
 
             case "DELETE":
-                return pc.bgRed(pc.black(` ${s} `));
+                return bg_red(black(` ${s} `));
 
             default:
                 return s;

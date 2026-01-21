@@ -1,4 +1,4 @@
-import pc from "picocolors";
+import { green } from "@/colors";
 import type { Highlighter } from "@/types";
 
 /**
@@ -13,6 +13,6 @@ export function create_windows_path_highlighter(apply?: (m: string) => string): 
     return {
         order: 10,
         regex: /(?:[a-zA-Z]:\\(?:[\w ~.-]+\\)+|(?:[\w~.-]+\\)+)[\w~.-]*/g,
-        apply: apply ?? pc.green
+        apply: apply ?? green
     };
 }

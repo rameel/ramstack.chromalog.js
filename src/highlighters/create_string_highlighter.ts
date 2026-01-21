@@ -1,4 +1,4 @@
-import pc from "picocolors";
+import { yellow_bright } from "@/colors";
 import type { Highlighter } from "@/types";
 
 /**
@@ -12,6 +12,6 @@ import type { Highlighter } from "@/types";
 export function create_string_highlighter(apply?: (m: string) => string): Highlighter {
     return {
         regex: /"[^"]*"|'[^']*'/g,
-        apply: apply ?? pc.yellowBright
+        apply: apply ?? yellow_bright
     };
 }

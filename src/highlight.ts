@@ -1,4 +1,5 @@
 import type { Highlighter } from "@/types";
+import supports_color from "supports-color";
 import {
     create_date_highlighter,
     create_datetime_iso_highlighter,
@@ -37,6 +38,10 @@ const default_rules: Highlighter[] = [
  * @returns The highlighted string.
  */
 export function highlight(value: string, rules?: Highlighter[]): string {
+    if (!supports_color.stdout) {
+        return value;
+    }
+
     let matches: MatchResult[] = [];
 
     for (let rule of rules ?? default_rules) {
