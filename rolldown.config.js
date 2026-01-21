@@ -1,7 +1,7 @@
 import { dts } from "rolldown-plugin-dts";
 
 export default [{
-    input: "src/index.ts",
+    input: "src/chromalog.ts",
     platform: "node",
     external(id) {
         const is_internal = id.startsWith('@')
