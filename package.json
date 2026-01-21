@@ -23,7 +23,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rolldown -c"
+    "build": "rolldown -c",
+    "test": "vitest run"
   },
   "keywords": [
     "log",
@@ -31,8 +32,9 @@
     "console",
     "highlight",
     "highlighting",
-    "color",
-    "terminal"
+    "colors",
+    "terminal",
+    "formatting"
   ],
   "devDependencies": {
     "@types/node": "^25.0.9",
