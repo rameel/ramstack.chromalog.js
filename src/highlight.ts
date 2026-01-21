@@ -27,11 +27,11 @@ const default_rules: Highlighter[] = [
     create_windows_path_highlighter()
 ];
 
-export function highlight(str: string, rules?: Highlighter[]): string {
+export function highlight(value: string, rules?: Highlighter[]): string {
     let matches: MatchResult[] = [];
 
     for (let rule of rules ?? default_rules) {
-        gather_matches(str, rule, matches);
+        gather_matches(value, rule, matches);
     }
 
     matches.sort((a, b) => {
@@ -49,14 +49,14 @@ export function highlight(str: string, rules?: Highlighter[]): string {
         }
 
         if (match.start > pos) {
-            builder.push(str.slice(pos, match.start));
+            builder.push(value.slice(pos, match.start));
         }
 
         builder.push(match.apply());
         pos = match.start + match.count;
     }
 
-    pos < str.length && builder.push(str.slice(pos));
+    pos < value.length && builder.push(value.slice(pos));
     return builder.join("");
 }
 
