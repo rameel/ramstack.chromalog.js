@@ -74,15 +74,18 @@ export function highlight(value: string, rules?: Highlighter[]): string {
     return builder.join("");
 }
 
-function gather_matches(str: string, rule: Highlighter, matches: MatchResult[]) {
-    for (let match of str.matchAll(rule.regex)) {
+function gather_matches(str: string, highlighter: Highlighter, matches: MatchResult[]) {
+    for (let match of str.matchAll(highlighter.regex)) {
         if (match[0].length > 0) {
-            const value = match[0];
             matches.push({
+                order: highlighter.order ?? 0,
                 start: match.index,
                 count: match[0].length,
-                order: rule.order ?? 0,
-                apply: () => rule.apply(value)
+                value: match[0],
+                style: highlighter,
+                apply() {
+                    return this.style.apply(this.value);
+                }
             });
         }
     }
@@ -92,5 +95,7 @@ interface MatchResult {
     order: number;
     start: number;
     count: number;
+    value: string;
+    style: Highlighter;
     apply: () => string
 }
