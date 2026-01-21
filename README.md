@@ -9,6 +9,7 @@ It does not parse logs or formats for you – it only highlights text based on r
 
 The goal is to keep things predictable, fast, and easy to customize.
 
+![](https://github.com/rameel/ramstack.chromalog.js/blob/main/assets/screenshot.png)
 
 ## Installation
 ```bash
