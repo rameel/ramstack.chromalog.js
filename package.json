@@ -1,7 +1,7 @@
 {
   "name": "@ramstack/chromalog",
   "description": "A small and simple library for log highlighting before printing text to the terminal",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "author": "rameel <rameel-b@hotmail.com>",
   "license": "MIT",
