@@ -4,7 +4,8 @@
 
 A small and simple library for log highlighting before printing text to the terminal.
 
-![](https://github.com/rameel/ramstack.chromalog.js/blob/main/assets/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/rameel/ramstack.chromalog.js/468f2e92d540246f5775d05a2d0daf6487f18af1/assets/screenshot.png)
+
 
 ## Installation
 ```bash
