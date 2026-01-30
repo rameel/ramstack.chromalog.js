@@ -44,26 +44,24 @@ export function create_keyword_highlighter(apply?: (m: string) => string): Highl
 
             case "ERR":
             case "ERROR":
-                return red(s);
-
             case "FTL":
             case "FATAL":
                 return red(s);
 
             case "GET":
             case "HEAD":
-                let black_on_green = (s: string) => "\x1b[42;30m " + s + " \x1b[0m";
-                return black_on_green(s);
+                // black on green
+                return "\x1b[42;30m " + s + " \x1b[0m";
 
             case "PUT":
             case "POST":
             case "PATCH":
-                let black_on_cyan = (s: string) => "\x1b[46;30m " + s + " \x1b[0m";
-                return black_on_cyan(s);
+                // black on cyan
+                return "\x1b[46;30m " + s + " \x1b[0m";
 
             case "DELETE":
-                let black_on_red = (s: string) => "\x1b[41;30m " + s + " \x1b[0m";
-                return black_on_red(s);
+                // black on red
+                return "\x1b[41;30m " + s + " \x1b[0m";
 
             default:
                 return s;
