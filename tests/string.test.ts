@@ -8,6 +8,10 @@ describe("string", () => {
         expect(
             highlight(`Print 'Hello' and continue`, [highlighter])
         ).toBe(`Print [string: 'Hello'] and continue`);
+
+        expect(
+            highlight(`It's o'clock now`, [highlighter])
+        ).toBe(`It's o'clock now`);
     });
 
     test("highlights double-quoted string ", () => {
@@ -15,5 +19,9 @@ describe("string", () => {
         expect(
             highlight(`Print "Hello" and continue`, [highlighter])
         ).toBe(`Print [string: "Hello"] and continue`);
+
+        expect(
+            highlight(`6.7"phone vs 6.8"phone`, [highlighter])
+        ).toBe(`6.7"phone vs 6.8"phone`);
     });
 });
