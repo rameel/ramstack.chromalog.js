@@ -13,18 +13,17 @@ describe("path", () => {
             "/",
             "~/",
             "/usr",
-            "usr/",
-            "/usr/bin",
+            "../usr",
+            "~/usr/bin",
             "/usr/bin/",
-            "usr/bin",
-            "usr/../bin",
+            "../usr/bin",
+            "~/usr/../bin",
             "/usr/../bin",
-            "~/Documents",
-            "Documents/",
+            "/Documents",
             "~/Documents/",
-            ".dist/",
+            "./dist/",
             "./dist",
-            "./dist/index.js"
+            "../dist/index.js"
         ];
 
         for (let value of values) {
@@ -37,11 +36,13 @@ describe("path", () => {
     test("highlights windows path ", () => {
         const highlighter = create_windows_path_highlighter(s => `[path: ${s}]`);
         const values = [
-            "C:\\Users\\admin\\Documents",
-            "d:\\Users\\admin\\Documents",
-            "admin\\",
-            "admin\\Documents",
-            "admin\\Documents\\"
+            "C:\\",
+            "C:\\Programs Files\\",
+            "C:\\Programs Files\\Terminal",
+            "C:\\Programs Files\\Terminal App\\Terminal.exe",
+            "Z:\\admin",
+            "Z:\\admin\\Documents",
+            "Z:\\admin\\Documents\\"
         ];
 
         for (let value of values) {
@@ -57,7 +58,7 @@ describe("path", () => {
             create_windows_path_highlighter(s => `[windows: ${s}]`)
         ];
         expect(
-            highlight("/usr/bin and user\\admin", highlighters)
-        ).toBe(`[unix: /usr/bin] and [windows: user\\admin]`);
+            highlight("/usr/bin and C:\\Users\\Admin", highlighters)
+        ).toBe(`[unix: /usr/bin] and [windows: C:\\Users\\Admin]`);
     });
 });
