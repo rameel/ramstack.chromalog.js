@@ -20,6 +20,7 @@ describe("date", () => {
             "12.08.1938",
             "03-10-1925",
         ];
+
         for (const value of values) {
             expect(
                 highlight(`(${value})`, [highlighter])
@@ -29,5 +30,29 @@ describe("date", () => {
         expect(
             highlight("Between 2020-05-20 and 20.05.2020", [highlighter])
         ).toBe("Between [date: 2020-05-20] and [date: 20.05.2020]");
+    });
+
+    test("does not match dates with inconsistent separators inside", () => {
+        const highlighter = create_date_highlighter(s => `[date: ${s}]`);
+
+        const values = [
+            "20/02-1985",
+            "15/04-2017",
+            "2024-01/15",
+            "31-12/1999",
+            "01.01-2000",
+            "28/02.2024",
+            "1995-06/30",
+            "12-03/2008",
+            "07.11-2022",
+        ];
+
+        for (const date of values) {
+            // plain
+            expect(highlight(date, [highlighter])).toBe(date);
+
+            expect(highlight(`(${date})`, [highlighter])).toBe(`(${date})`);
+            expect(highlight(`start: ${date}`, [highlighter])).toBe(`start: ${date}`);
+        }
     });
 });

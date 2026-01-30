@@ -11,7 +11,7 @@ import type { Highlighter } from "@/types";
  */
 export function create_string_highlighter(apply?: (m: string) => string): Highlighter {
     return {
-        regex: /"[^"]*"|'[^']*'/g,
+        regex: /(?<![\w])(?:"[^"]*"|'[^']*')/g,
         apply: apply ?? yellow_bright
     };
 }
