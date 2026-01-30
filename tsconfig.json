@@ -4,6 +4,7 @@
     "module": "es2022",
     "strict": true,
     "esModuleInterop": true,
+    "declaration": true,
     "isolatedDeclarations": true,
     "moduleResolution": "node",
     "paths": {
