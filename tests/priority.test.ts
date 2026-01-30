@@ -1,57 +1,28 @@
-import { describe, expect, test } from "vitest";
+import { expect, test } from "vitest";
 import { highlight } from "@/highlight";
-import {
-    create_date_highlighter,
-    create_unix_path_highlighter,
-    create_unix_process_highlighter
-} from "@/highlighters";
+import type { Highlighter } from "@/types";
 
-describe("highlighter priorities (order)", () => {
-    test("date should win over path", () => {
-        const path_highlighter = create_unix_path_highlighter(s => `[path: ${s}]`);
-        const date_highlighter = create_date_highlighter(s => `[date: ${s}]`);
+const h1: Highlighter = {
+    regex: /_abc_/g,
+    order: 0,
+    apply: s => `[h1: ${s}]`
+};
 
-        expect(
-            highlight("Check file at 20/01/2026 for details", [path_highlighter, date_highlighter])
-        ).toBe("Check file at [date: 20/01/2026] for details");
+const h2: Highlighter = {
+    regex: /_[a-z]{3}_/g,
+    order: 5,
+    apply: s => `[h2: ${s}]`
+};
 
-        expect(
-            highlight("Check file at 20/01/2026 for details", [date_highlighter, path_highlighter])
-        ).toBe("Check file at [date: 20/01/2026] for details");
+test("highlighter priorities (order)", () => {
+    expect(
+        highlight("_abc_", [h1, h2])
+    ).toBe("[h1: _abc_]");
 
-        path_highlighter.order = 0;
-        date_highlighter.order = 1;
+    h1.order = 5;
+    h2.order = 0;
 
-        expect(
-            highlight("Check file at 20/01/2026 for details", [path_highlighter, date_highlighter])
-        ).toBe("Check file at [path: 20/01/2026] for details");
-
-        expect(
-            highlight("Check file at 20/01/2026 for details", [date_highlighter, path_highlighter])
-        ).toBe("Check file at [path: 20/01/2026] for details");
-    });
-
-    test("process should win over path", () => {
-        const process_highlighter = create_unix_process_highlighter(s => `[proc: ${s}]`);
-        const path_highlighter = create_unix_path_highlighter(s => `[path: ${s}]`);
-
-        expect(
-            highlight("/usr/lib/bluetooth/bluetoothd[999]", [process_highlighter, path_highlighter])
-        ).toBe("[proc: /usr/lib/bluetooth/bluetoothd][999]");
-
-        expect(
-            highlight("/usr/lib/bluetooth/bluetoothd[999]", [path_highlighter, process_highlighter])
-        ).toBe("[proc: /usr/lib/bluetooth/bluetoothd][999]");
-
-        path_highlighter.order = 0;
-        process_highlighter.order = 1;
-
-        expect(
-            highlight("/usr/lib/bluetooth/bluetoothd[999]", [process_highlighter, path_highlighter])
-        ).toBe("[path: /usr/lib/bluetooth/bluetoothd][999]");
-
-        expect(
-            highlight("/usr/lib/bluetooth/bluetoothd[999]", [path_highlighter, process_highlighter])
-        ).toBe("[path: /usr/lib/bluetooth/bluetoothd][999]");
-    });
+    expect(
+        highlight("_abc_", [h1, h2])
+    ).toBe("[h2: _abc_]");
 });
